@@ -1,7 +1,6 @@
 package org.jfree.data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -109,7 +108,7 @@ class RangeTest {
     	assertEquals(3,testRange.getUpperBound(),0.001,
     			"Range shift should not be more than 2!");
     	Range testRange2 = Range.shift(exampleRange,2.0,true);
-    	assertEquals(1,testRange.getLowerBound(),0.001,
+    	assertEquals(1,testRange2.getLowerBound(),0.001,
     			"Range shift should not be more than 2!");
     }
     
