@@ -24,31 +24,56 @@ class RangeTest {
     void testGetCentralValue() {
         exampleRange = new Range(2, 6);
         //
-        assertEquals(0, exampleRange.getCentralValue(), 0.0001,
-        		"The central value of (-1, 1) should be 0");
-        //
         assertEquals(4, exampleRange.getCentralValue(), 0.0001,
                 "The central value of (2, 6) should be 4");
-        //
-        assertEquals(3, exampleRange.getCentralValue(), 0.0001,
-        		"The central value of (3, 3) should be 3");
     }
     /*
      * getLength()
      */
+    
+    @Test
+    void testBounds() {
+    	Range exampleRange = new Range(1,5);
+    	assertEquals(1,exampleRange.getLowerBound(),
+    			"Lower range should equals to the lowerbound range");
+    	assertEquals(5,exampleRange.getUpperBound(),
+    			"Upper range should equals to the higherbound range");
+    }
     @Test
     void testGetLength() {
-        exampleRange = new Range(1, 5);
+        Range exampleRange = new Range(1, 5);
         assertEquals(4, exampleRange.getLength(), 0.0001,
                 "The length of (1, 5) should be 4");
     }    
+    
+    void testIntersect() {
+    	Range exampleRange = new Range(1,5);
+    	//
+    	assertTrue(exampleRange.intersects(2,6)
+    			,"This should intersect!");
+    	//
+    	assertTrue(exampleRange.intersects(2,4),
+    			"This should intersect!");
+    	//
+    	assertTrue(exampleRange.intersects(-5,1),
+    			"This should intersect!");
+    	//
+    	assertTrue(exampleRange.interesects(5,10),
+    			"This should intersect!");
+    	//
+    	assertFalse(exampleRange.intersects(-5,0),
+    			"This should not intersect!");
+    	//
+    	assertFalse(exampleRange.intersects(6,10),
+    			"This should not intersect!");
+    	}
     /*
      * contains(double)
      */
 
     @Test
     void testContainsValue() {
-        exampleRange = new Range(1, 5);
+        Range exampleRange = new Range(1, 5);
         //
         assertEquals(0, exampleRange.getLength(), 0.0001,
         		"The length of (3, 3) should be 0");
@@ -71,7 +96,7 @@ class RangeTest {
     
     @Test
     void testContainsNull() {
-    	exampleRange = new Range(null,null);
+    	Range exampleRange = new Range(null,null);
     	assertTrue(exampleRange.contains(null), 
     			"Range should not contain null value.");
     }
@@ -79,6 +104,7 @@ class RangeTest {
     @Test
     //This test is just an example, 2 is not constant
     void testShift() {
+    	Range exampleRange = new Range(-1,1);
     	Range testRange = Range.shift(exampleRange, 2.0, true);
     	assertTrue(3,testRange.getUpperBound(),0.001,
     			"Range shift should not be more than 2!");
@@ -91,6 +117,7 @@ class RangeTest {
     @Test
     //This test is just an example, 2 is not constant
     void testConstrain() {
+    	Range exampleRange = new Range(-1,1);
     	double test = exampleRange.constrain(5.0);
     	assertTrue(test <= 1,
     			"Range should not be over than the actual upper Range");
@@ -98,4 +125,6 @@ class RangeTest {
     	assertTrue(test >= -1,
     			"Range should not be over than the actual lower Range");
     }
+    
+
 }
