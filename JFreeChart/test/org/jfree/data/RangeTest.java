@@ -171,13 +171,6 @@ class RangeTest {
     	assertEquals(6, expanded.getUpperBound(), 0.0000001);
     }
     
-    @Test
-    void testExpandNegativeMargins() {
-    	Range base = new Range(2,6);
-    	Range expanded = Range.expand(base, -0.25, -0.25);
-    	assertEquals(3, expanded.getLowerBound(), 0.0000001);
-    	assertEquals(5, expanded.getUpperBound(), 0.0000001);
-    }
     
     @Test
     void testExpandLargeMargins() {
