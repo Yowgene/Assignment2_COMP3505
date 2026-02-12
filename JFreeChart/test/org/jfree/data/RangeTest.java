@@ -126,36 +126,55 @@ class RangeTest {
     }
     
     @Test
-    void testEquals_SameValues() {
+    void testEqualsSameValues() {
     	Range other = new Range(-1, 1);
     	assertEquals(true, exampleRange.equals(other));
     }
     
     @Test
-    void testEquals_DifferentLowerBound() {
+    void testEqualsDifferentLowerBound() {
     	Range other = new Range(1, 1);
     	assertEquals(false, exampleRange.equals(other));
     }
     
     @Test
-    void testEquals_DifferentUpperBound() {
+    void testEqualsDifferentUpperBound() {
     	Range other = new Range(-1, 2);
     	assertEquals(false, exampleRange.equals(other));
     }
     
     @Test
-    void testEquals_NullObject() {
+    void testEqualsNullObject() {
     	assertEquals(false, exampleRange.equals(null));
     }
     
     @Test
-    void testEquals_SameReference() {
+    void testEqualsSameReference() {
     	assertEquals(false, exampleRange.equals(exampleRange));
     }
     
     @Test
-    void testExpand() {
-    	
+    void testExpandNormalExpasion() {
+    	Range base = new Range(2,6);
+    	Range expanded = Range.expand(base, 0.25, 0.5);
+    	assertEquals(1, expanded.getLowerBound(), 0.0000001);
+    	assertEquals(8, expanded.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandZeroMargins() {
+    	Range base = new Range(2,6);
+    	Range expanded = Range.expand(base, 0.0, 0.0);
+    	assertEquals(2, expanded.getLowerBound(), 0.0000001);
+    	assertEquals(6, expanded.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandNegativeMargins() {
+    	Range base = new Range(2,6);
+    	Range expanded = Range.expand(base, -0.25, -0.25);
+    	assertEquals(3, expanded.getLowerBound(), 0.0000001);
+    	assertEquals(5, expanded.getUpperBound(), 0.0000001);
     }
     
     @Test
