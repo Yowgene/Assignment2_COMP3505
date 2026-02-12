@@ -125,5 +125,47 @@ class RangeTest {
     			"Range should not be over than the actual lower Range");
     }
     
+    @Test
+    void testEquals_SameValues() {
+    	Range other = new Range(-1, 1);
+    	assertEquals(true, exampleRange.equals(other));
+    }
+    
+    @Test
+    void testEquals_DifferentLowerBound() {
+    	Range other = new Range(1, 1);
+    	assertEquals(false, exampleRange.equals(other));
+    }
+    
+    @Test
+    void testEquals_DifferentUpperBound() {
+    	Range other = new Range(-1, 2);
+    	assertEquals(false, exampleRange.equals(other));
+    }
+    
+    @Test
+    void testEquals_NullObject() {
+    	assertEquals(false, exampleRange.equals(null));
+    }
+    
+    @Test
+    void testEquals_SameReference() {
+    	assertEquals(false, exampleRange.equals(exampleRange));
+    }
+    
+    @Test
+    void testExpand() {
+    	
+    }
+    
+    @Test
+    void testExpandToInclude() {
+    	
+    }
+    
+    @Test
+    void testToString() {
+    	
+    }
 
 }
