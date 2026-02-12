@@ -240,8 +240,15 @@ class RangeTest {
     }
     
     @Test
-    void testToString() {
-    	
+    void testToStringStandardRange() {
+    	Range r = new Range(2.0, 6.0); 
+    	assertEquals("Range[2.0, 6.0]", r.toString());
     }
+    
+    @Test
+    void testToStringNegativeBounds() {
+    	assertEquals("Range[-1.0, 1.0]", exampleRange.toString());
+    }
+    
 
 }
