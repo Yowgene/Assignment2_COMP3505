@@ -18,3 +18,5 @@ We used decision based testing for methods involving conditional logic. The inte
 ### 2. 	If you were to develop test cases for org.jfree.data.DataUtilities, how can this dependency affect test cases that you develop for DataUtilities class. Discuss your answer (at this point, you do not need to develop test cases for this class).
 
 ### 3. 	Difficulties encountered, challenges overcome, and lessons learned from performing the assignment. (If there are any challenges or you are concerned with your learning progress that you do not want to share on the team document, please feel free to email your course instructor. I am always happy to hear from you and help you.)
+
+One of the  challenges in this assignment was learning to rely strictly on the Javadoc specification rather than the actual implementation. Since the provided version of JFreeChart intentionally contains defects, some tests failed even though they were correctly written according to the specification. This required a shift in mindset: the purpose of testing is to validate the implementation against the specification, not to adjust tests to match incorrect behavior. 
