@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.security.InvalidParameterException;
+
 
 class RangeTest {
 	
@@ -178,8 +180,63 @@ class RangeTest {
     }
     
     @Test
-    void testExpandToInclude() {
-    	
+    void testExpandLargeMargins() {
+    	Range base = new Range(1,2);
+    	Range expanded = Range.expand(base, 1.0, 2.0);
+    	assertEquals(0, expanded.getLowerBound(), 0.0000001);
+    	assertEquals(4, expanded.getUpperBound(), 0.0000001);
+    }
+    
+    void textExpandNullRange() {
+    	try {
+    		Range.expand(null, 0.1, 0.1);
+    		fail("Expected InvalidParameterException");
+    	} catch (InvalidParameterException e) {
+    		assertEquals(true, true);
+    	}
+    }
+    
+    
+    @Test
+    void testExpandToIncludeValueInsideRange() {
+    	Range base = new Range(2, 6);
+    	Range result = Range.expandToInclude(base, 4.0);
+    	assertEquals(2, result.getLowerBound(), 0.0000001);
+    	assertEquals(6, result.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandToIncludeValueBelowRange() {
+    	Range base = new Range(2, 6);
+    	Range result = Range.expandToInclude(base, 1.0);
+    	assertEquals(1, result.getLowerBound(), 0.0000001);
+    	assertEquals(6, result.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandToIncludeValueAboveRange() {
+    	Range base = new Range(2, 6);
+    	Range result = Range.expandToInclude(base, 8.0);
+    	assertEquals(2, result.getLowerBound(), 0.0000001);
+    	assertEquals(8, result.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandToIncludeNullRange() {
+    	Range result = Range.expandToInclude(null, 5.0);
+    	assertEquals(5, result.getLowerBound(), 0.0000001);
+    	assertEquals(5, result.getUpperBound(), 0.0000001);
+    }
+    
+    @Test
+    void testExpandToIncludeValueEqualsBounds() {
+    	Range base = new Range(2, 6);
+    	Range resultLower = Range.expandToInclude(base, 2.0);
+    	Range resultUpper = Range.expandToInclude(resultLower, 6.0);
+    	assertEquals(2, resultLower.getLowerBound(), 0.0000001);
+    	assertEquals(6, resultLower.getUpperBound(), 0.0000001);
+    	assertEquals(2, resultUpper.getLowerBound(), 0.0000001);
+    	assertEquals(6, resultUpper.getUpperBound(), 0.0000001);
     }
     
     @Test
